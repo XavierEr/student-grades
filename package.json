@@ -2,8 +2,14 @@
   "name": "student-grades",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": ">=14.15.0"
+  },
+  "private": true,
   "main": "index.js",
   "scripts": {
+    "start": "./node_modules/.bin/webpack serve -c webpack.dev.js",
+    "build:prod": "./node_modules/.bin/webpack -c webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +21,43 @@
   "bugs": {
     "url": "https://github.com/XavierEr/student-grades/issues"
   },
-  "homepage": "https://github.com/XavierEr/student-grades#readme"
+  "homepage": "https://github.com/XavierEr/student-grades#readme",
+  "dependencies": {
+    "@loadable/component": "^5.15.2",
+    "axios": "^0.27.2",
+    "core-js": "^3.25.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "@babel/preset-flow": "^7.18.6",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
+    "@svgr/webpack": "^6.3.1",
+    "@types/loadable__component": "^5.13.4",
+    "@types/react": "^17.0.4",
+    "@types/react-dom": "^17.0.3",
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.1",
+    "cssnano": "^5.1.12",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "postcss": "^8.4.16",
+    "postcss-loader": "^7.0.1",
+    "postcss-preset-env": "^7.7.2",
+    "react-refresh": "^0.14.0",
+    "sass": "^1.54.3",
+    "sass-loader": "^13.0.2",
+    "style-loader": "^3.3.1",
+    "typescript": "^4.7.4",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.3",
+    "webpack-merge": "^5.8.0"
+  }
 }
