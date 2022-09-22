@@ -76,6 +76,8 @@ const GradeTracker: React.FC<GradeTrackerProps> = ({
 
   return (
     <div className={clsx(styles.container, className)}>
+      {isLoading ? <div className={styles.loading}>Loading...</div> : null}
+
       {students.map(student => <Student student={student} />)}
     </div>
   );
