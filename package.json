@@ -1,0 +1,19 @@
+{
+  "name": "student-grades",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XavierEr/student-grades.git"
+  },
+  "author": "xavier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XavierEr/student-grades/issues"
+  },
+  "homepage": "https://github.com/XavierEr/student-grades#readme"
+}
