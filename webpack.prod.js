@@ -7,7 +7,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = merge(common, {
   output: {
-    path: resolve(__dirname, 'docs')
+    path: resolve(__dirname, 'docs'),
+    publicPath: '/student-grades/'
   },
 
   mode: 'production',
