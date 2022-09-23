@@ -1,7 +1,5 @@
 # student-grades
 
-## Demo
-
 Check out [the demo](https://xavierer.github.io/student-grades/)
 
 ## Install Dependencies
