@@ -1,10 +1,15 @@
 const { resolve } = require('path');
 
+const CopyPlugin = require('copy-webpack-plugin');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = merge(common, {
+  output: {
+    path: resolve(__dirname, 'doc')
+  },
+
   mode: 'production',
 
   module: {
@@ -35,6 +40,14 @@ const config = merge(common, {
 
   plugins: [
     new MiniCssExtractPlugin({ filename: '[name].[contenthash:8].css', chunkFilename: '[id].[contenthash:8].css' }),
+    new CopyPlugin({
+      patterns: [
+        { from: resolve(__dirname, 'public/favicon.ico'), to: resolve(__dirname, 'doc') },
+        { from: resolve(__dirname, 'public/manifest.json'), to: resolve(__dirname, 'doc') },
+        { from: resolve(__dirname, 'public/logo192.png'), to: resolve(__dirname, 'doc') },
+        { from: resolve(__dirname, 'public/logo512.png'), to: resolve(__dirname, 'doc') }
+      ]
+    })
   ]
 });
 

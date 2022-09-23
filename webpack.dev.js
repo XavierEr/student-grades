@@ -1,10 +1,15 @@
 const { resolve } = require('path');
 
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 
 const config = merge(common, {
+  output: {
+    path: resolve(__dirname, 'dist')
+  },
+
   mode: 'development',
   devtool: 'inline-source-map',
 
@@ -51,6 +56,14 @@ const config = merge(common, {
 
   plugins: [
     new ReactRefreshPlugin(),
+    new CopyPlugin({
+      patterns: [
+        { from: resolve(__dirname, 'public/favicon.ico'), to: resolve(__dirname, 'dist') },
+        { from: resolve(__dirname, 'public/manifest.json'), to: resolve(__dirname, 'dist') },
+        { from: resolve(__dirname, 'public/logo192.png'), to: resolve(__dirname, 'dist') },
+        { from: resolve(__dirname, 'public/logo512.png'), to: resolve(__dirname, 'dist') }
+      ]
+    })
   ]
 });
 
