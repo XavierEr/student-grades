@@ -9,12 +9,15 @@ html {
   width: 100%;
 }
 
+button,
 body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  -webkit-tap-highlight-color: transparent;
-  background-color: #E5E5E5;
   font-family: "Lato", sans-serif;
+}
+
+body {
+  background-color: #e5e5e5;
   height: 100%;
   margin: 0;
   overflow: auto;
