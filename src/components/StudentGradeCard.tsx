@@ -2,9 +2,9 @@
 import React, { useMemo } from 'react';
 //#endregion
 
-import styles from '../styles/components/Student.module.scss';
+import styles from '../styles/components/StudentGradeCard.module.scss';
 
-const Student: React.FC<StudentProps> = ({
+const StudentGradeCard: React.FC<StudentGradeCardProps> = ({
   student
 }): JSX.Element => {
   const courseIdsDisplay = useMemo<string>(() => {
@@ -35,4 +35,4 @@ const Student: React.FC<StudentProps> = ({
   );
 }
 
-export default Student;
+export default StudentGradeCard;

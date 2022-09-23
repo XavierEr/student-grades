@@ -1,3 +1,0 @@
-interface StudentProps {
-  student: Student;
-}

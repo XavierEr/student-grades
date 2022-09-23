@@ -1,0 +1,3 @@
+interface StudentGradeCardProps {
+  student: Student;
+}
