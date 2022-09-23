@@ -1,16 +1,21 @@
 //#region Library imports
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import axios, { type CancelToken, type CancelTokenSource } from 'axios';
 //#endregion
 
 //#region Helper imports
-import { getGrades } from '../apis/grade';
+import { getGradesWithRetries } from '../apis/grade';
 
 import { clsx } from '../helpers/clsx';
 //#endregion
 
 //#region React Component imports
-import Student from './Student';
+import StudentGradeCard from './StudentGradeCard';
+//#endregion
+
+//#region SVG imports
+import ErrorIcon from '../icons/error.svg';
+import RetryIcon from '../icons/retry.svg';
 //#endregion
 
 import styles from '../styles/components/GradeTracker.module.scss';
@@ -20,6 +25,7 @@ const GradeTracker: React.FC<GradeTrackerProps> = ({
 }): JSX.Element => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [hasError, setHasError] = useState<boolean>(false);
   const [grades, setGrades] = useState<Array<Grade>>([]);
 
   const students = useMemo<Array<Student>>(() => {
@@ -49,6 +55,20 @@ const GradeTracker: React.FC<GradeTrackerProps> = ({
     }, []);
   }, [grades]);
 
+  const handleTryAgainClick = useCallback<() => Promise<void>>(async () => {
+    try {
+      setIsLoading(true);
+
+      const grades = await getGradesWithRetries(3);
+
+      setGrades(grades);
+    } catch (error: any) {
+      setHasError(true);
+    }
+
+    setIsLoading(false);
+  }, []);
+
   // Retrieve grades
   useEffect(() => {
     const cancelTokenSource: CancelTokenSource = axios.CancelToken.source();
@@ -57,11 +77,11 @@ const GradeTracker: React.FC<GradeTrackerProps> = ({
       try {
         setIsLoading(true);
 
-        const grades = await getGrades(cancelToken);
+        const grades = await getGradesWithRetries(3, cancelToken);
 
         setGrades(grades);
       } catch (error: any) {
-        console.log(error)
+        setHasError(true);
       }
 
       setIsLoading(false);
@@ -70,7 +90,7 @@ const GradeTracker: React.FC<GradeTrackerProps> = ({
     initGrades(cancelTokenSource.token);
 
     return () => {
-      cancelTokenSource.cancel('Component unmount');
+      cancelTokenSource.cancel('component_unmount');
     }
   }, []);
 
@@ -78,7 +98,22 @@ const GradeTracker: React.FC<GradeTrackerProps> = ({
     <div className={clsx(styles.container, className)}>
       {isLoading ? <div className={styles.loading}>Loading...</div> : null}
 
-      {students.map(student => <Student student={student} />)}
+      {hasError ? <div className={styles.error}>
+        <ErrorIcon />
+
+        <div className={styles.message}>Error 401</div>
+
+        <button
+          type="button"
+          onClick={handleTryAgainClick}>
+          <RetryIcon />
+          Try again
+        </button>
+      </div> : null}
+
+      {students.map(student => <StudentGradeCard
+        key={student.id}
+        student={student} />)}
     </div>
   );
 }
