@@ -37,7 +37,9 @@ const config = {
     new CopyPlugin({
       patterns: [
         { from: resolve(__dirname, 'public/favicon.ico'), to: resolve(__dirname, 'dist') },
-        { from: resolve(__dirname, 'public/manifest.json'), to: resolve(__dirname, 'dist') }
+        { from: resolve(__dirname, 'public/manifest.json'), to: resolve(__dirname, 'dist') },
+        { from: resolve(__dirname, 'public/logo192.png'), to: resolve(__dirname, 'dist') },
+        { from: resolve(__dirname, 'public/logo512.png'), to: resolve(__dirname, 'dist') }
       ]
     })
   ]
